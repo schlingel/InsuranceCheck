@@ -57,11 +57,12 @@
 							<label for="insurenceTax">Variable Kosten(%)</label> <input id="insuranceTax" ng-model="calc.data.assetShare"></input>
 						</div>
 						<div>
+							<label class="x-small-label">Auszahlungsgebühr {{calc.data.twotrustSavings * 0.03 | currency}} (3% der Auszahlungsraten)</label><br />
 							<label class="x-small-label">Maklerprovision {{calc.data.brokerCosts | currency}} <i>(Gesamtkosten werden auf monatliche Kosten in den ersten 5 Jahren aufgeschlagen)</i></label><br />
 							<label class="x-small-label">Monatliche Fixkosten {{calc.data.monthlyRate * (calc.data.managementCosts + calc.data.insurenceTax + calc.data.brokerRate) | currency}} ({{(calc.data.managementCosts + calc.data.insurenceTax + calc.data.brokerRate) | percentage}})</label><br />
 							<label class="x-small-label">Gesamte Fixkosten {{calc.data.monthlyRate * (calc.data.managementCosts + calc.data.insurenceTax + calc.data.brokerRate) * (calc.data.pensionAge - calc.data.age) * 12 | currency}}</label><br />
 							<label class="x-small-label">Gesamten variablen Kosten {{calc.data.variableCosts | currency}} ({{calc.data.assetShare | percentage}} von Guthaben jedes Monat)</label><br />
-							<label class="x-small-label bold-label">Gesamtkosten {{calc.data.variableCosts + (calc.data.monthlyRate * (calc.data.managementCosts + calc.data.insurenceTax + calc.data.brokerRate) * (calc.data.pensionAge - calc.data.age) * 12) | currency }}</label>
+							<label class="x-small-label bold-label">Gesamtkosten {{(calc.data.twotrustSavings * 0.03) + calc.data.variableCosts + (calc.data.monthlyRate * (calc.data.managementCosts + calc.data.insurenceTax + calc.data.brokerRate) * (calc.data.pensionAge - calc.data.age) * 12) | currency }}</label>
 						</div>
 					</td>
 				</tr>
@@ -78,7 +79,7 @@
 				<tr>
 					<td>{{(calc.data.pensionAge - calc.data.age) * (calc.data.monthlyRate * 12) | currency}}</td>
 					<td>{{calc.data.passbookSavings | currency}}</td>
-					<td>{{calc.data.twotrustSavings | currency}}</td>
+					<td>{{calc.data.twotrustSavings * 0.97 | currency}}<br /><span class="x-small-label">(inkl. Auszahlungsgebühr)</span></td>
 				</tr>
 			</table>		
 			
