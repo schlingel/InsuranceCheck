@@ -1,0 +1,121 @@
+<html ng-app="todoApp" charset="UTF-8">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/moment-with-locales.js"></script>
+		<script type="text/javascript" src="js/numeral.min.js"></script>
+		<script type="text/javascript" src="js/numeral.de.min.js"></script>
+		<script type="text/javascript" src="angular.min.js"></script>
+		<script type="text/javascript" src="calculator.js"></script>
+		<script type="text/javascript" src="calculator.module.js"></script>
+
+		<link href="css/calculator.css" type="text/css" rel="stylesheet">
+	</head>
+
+	<div>
+		<div ng-controller="CalcController as calc">
+			<table class="big-table input-table">
+				<tr>
+					<td colspan="2"><h2>Versicherungsnehmerdaten</h2></td>
+				</tr>
+				<tr>
+					<td>
+						<div>
+							<label for="age">Alter</label> <input id="age" ng-model="calc.data.age"></input>
+						</div>
+						<div>
+							<label for="pensionAge">Pensionsantrittsalter</label> <input id="pensionAge" ng-model="calc.data.pensionAge"></input>
+						</div>
+						<div>
+							<span class="x-small-label">{{calc.data.pensionAge - calc.data.age}} Beitragsjahre</span> <br />
+							<span class="x-small-label">{{(calc.data.pensionAge - calc.data.age) * 12}} Monatsraten</span>
+						</div>
+					</td>
+					<td>
+						<div>
+							<label for="monthlyRate">Monatsrate</label> <input id="monthlyRate" ng-model="calc.data.monthlyRate" type="text"></input>€
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan="2"><h2>Versicherungsgeberdaten</h2></td>
+				</tr>
+
+				<tr>
+					<td>
+						<div>
+							<label for="brokerRate">Maklerkosten per <br />Monatsrate (%)</label> <input id="brokerRate" ng-model="calc.data.brokerRate" type="text">
+						</div>
+						<div>
+							<label for="managementCosts">Verwaltungskosten(%)</label> <input id="managementCosts" ng-model="calc.data.managementCosts"></input>
+						</div>
+						<div>
+							<label for="insurenceTax">Versicherungssteuer(%)</label> <input id="insuranceTax" ng-model="calc.data.insurenceTax"></input>
+						</div>
+						<div>
+							<label for="insurenceTax">Variable Kosten(%)</label> <input id="insuranceTax" ng-model="calc.data.assetShare"></input>
+						</div>
+						<div>
+							<label class="x-small-label">Maklerprovision {{calc.data.brokerCosts | currency}} <i>(Gesamtkosten werden auf monatliche Kosten in den ersten 5 Jahren aufgeschlagen)</i></label><br />
+							<label class="x-small-label">Monatliche Fixkosten {{calc.data.monthlyRate * (calc.data.managementCosts + calc.data.insurenceTax + calc.data.brokerRate) | currency}} ({{(calc.data.managementCosts + calc.data.insurenceTax + calc.data.brokerRate) | percentage}})</label><br />
+							<label class="x-small-label">Gesamte Fixkosten {{calc.data.monthlyRate * (calc.data.managementCosts + calc.data.insurenceTax + calc.data.brokerRate) * (calc.data.pensionAge - calc.data.age) * 12 | currency}}</label><br />
+							<label class="x-small-label">Gesamten variablen Kosten {{calc.data.variableCosts | currency}} ({{calc.data.assetShare | percentage}} von Guthaben jedes Monat)</label><br />
+							<label class="x-small-label bold-label">Gesamtkosten {{calc.data.variableCosts + (calc.data.monthlyRate * (calc.data.managementCosts + calc.data.insurenceTax + calc.data.brokerRate) * (calc.data.pensionAge - calc.data.age) * 12) | currency }}</label>
+						</div>
+					</td>
+				</tr>
+			</table>
+		
+			<h2>Sparformvergleich</h2>
+
+			<table class="big-table comparison-table">
+				<tr>
+					<th>Sparstrumpf</th>
+					<th>Sparbuch ({{calc.data.passbookInterest | percentage}})</th>
+					<th>Twotrust Selekt</th>
+				</tr>
+				<tr>
+					<td>{{(calc.data.pensionAge - calc.data.age) * (calc.data.monthlyRate * 12) | currency}}</td>
+					<td>{{calc.data.passbookSavings | currency}}</td>
+					<td>{{calc.data.twotrustSavings | currency}}</td>
+				</tr>
+			</table>		
+			
+			<h2>Wertentwicklung (inkl. potentiellem Zinszuwachs)</h2>
+
+			<table class="big-table">
+				<tr>
+					<th>Jahr</th>
+					<th ng-repeat="label in calc.labels.months">{{label}}</th>
+					<th>Kosten p.a.</th>
+					<th>Erspartes Guthaben p.a.</th>
+					<th>Verzinsung</th>
+				</tr>
+				<tr ng-repeat="row in calc.data.yearData track by $index" ng-class="{'brokerCostsYear' : row.isBrokerCostsYear}">
+					<td>{{row.year}}</td>
+
+					<td ng-repeat="month in row.months">
+						<span class="x-small-label netto-invest">Gespart {{month.nettoInvest | currency}}</span><br />
+						<span class="x-small-label brutto-invest">Gezahlt {{month.bruttoInvest | currency}}</span><br />
+						<span class="x-small-label costs">Reine Kosten {{month.cost | currency}}</span><br />
+						<span class="small-label bold-label current-savings">Guthaben {{month.savings | currency}}</span>
+					</td>
+
+					<td>{{row.costs | currency}}</td>
+					<td>
+						{{row.savings | currency}}
+					</td>
+					<td>
+						<input type="text" ng-model="calc.data.yearInterests[$index]"></input><br />
+						<span class="x-small-label">Zinsertrag {{calc.calculateInterest($index) | currency}}</span>
+					</td>
+				</tr>
+			</table>
+
+			<div class="interest-switch">
+				<button ng-click="calc.nullInterests()">Zinssatz nullen</button>
+			</div>
+		</div>
+	</div>
+</html>

@@ -1,0 +1,39 @@
+* {
+	font-family: verdana;
+}
+
+label {
+	display: inline-block;
+	min-width: 150px;
+}
+
+.big-table {
+	width: 100%;
+	font-size: 12px;
+	line-height: 14px;
+}
+
+.comparison-table {
+	text-align: center;
+}
+
+.input-table td {
+	vertical-align: top;
+	text-align: left;
+}
+
+.x-small-label {
+	font-size: 8px;
+}
+
+.small-label {
+	font-size: 10px;
+}
+
+.brokerCostsYear td {
+	background-color: #FFAAAA;
+}
+
+.bold-label {
+	font-weight: bold;
+}
