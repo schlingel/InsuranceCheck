@@ -1,4 +1,4 @@
-= Lebensversicherungs-Check
+# Lebensversicherungs-Check
 
 Lebensversicherungen sind für den Laien komplizierte Finanzprodukte. Die Verträge enthalten normalerweise gleich mehrere Posten in der Kategorie "Kosten". Diese werden im Verkaufsgespräch selten direkt und ehrlich kommuniziert. In den Gesprächen denen ich beigewohnt habe, wurde immer auf die potentiellen Zinsgewinne dank Fondgebundenheit hingewiesen. Im selben Atemzug wird dann meistens auch auf die Garantie hingewiesen, dass das was man einzahlt auch *mindestens* wieder ausbezahlt wird.
 
@@ -11,7 +11,7 @@ Dieses Skript (und hoffentlich weitere) sind entstanden aus zwei Gründen:
 * Der Notwendigkeit mit den Beitragszahlungen, Zinsen und Kosten zu spielen um sie auch richtig zu verstehen.
 * Fehlendes Excel-Fu um hier ohne JS auszukommen.
 
-== HDI Twotrust Selekt
+## HDI Twotrust Selekt
 
 Das erste Skript beschäftigt sich mit dem [TwoTrust Selekt-Produkt](https://www.hdi.de/multiselekt/) von HDI.
 
