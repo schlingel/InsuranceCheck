@@ -67,6 +67,7 @@ function CalcController($scope) {
     }
 
     function calcCosts() {
+        calc.data.monthlyRate = parseFloat(calc.data.monthlyRate);
     	var years = calc.data.pensionAge - calc.data.age;
     	var savings = 0;
     	var costs = 0;

@@ -33,7 +33,7 @@
 					</td>
 					<td>
 						<div>
-							<label for="monthlyRate">Monatsrate</label> <input id="monthlyRate" ng-model="calc.data.monthlyRate" type="text"></input>€
+							<label for="monthlyRate">Monatsrate</label> <input id="monthlyRate" ng-model="calc.data.monthlyRate" ng-model-options="{ debounce : 100 }" type="text"></input>€
 						</div>
 					</td>
 				</tr>
