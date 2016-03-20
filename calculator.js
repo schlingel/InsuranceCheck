@@ -136,7 +136,7 @@ function CalcController($scope) {
     	var interests = [];
 
     	for(var i = 0; i < years; i++) {
-    		interests.push(i < 7 ? badInterest(i) : 4);
+    		interests.push(i < 7 ? badInterest(i) : goodInterest());
     	}
 
     	return interests;
@@ -145,6 +145,11 @@ function CalcController($scope) {
     		var factors = [ 10, 10, 20, 100, 60, 50, 40 ];
     		return (-1) * (Math.floor(Math.random() * factors[i]) + 1);
     	}
+
+        function goodInterest() {
+            var isPos = Math.random() >= 0.5;
+            return (Math.floor(Math.random() * 10) + 1) * (isPos ? 1 : -1);
+        }
     }
 
     function getMonthLabels() {

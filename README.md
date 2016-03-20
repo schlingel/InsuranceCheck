@@ -13,6 +13,8 @@ Dieses Skript (und hoffentlich weitere) sind entstanden aus zwei Gründen:
 
 ## HDI Twotrust Selekt
 
+### Das Produkt
+
 Das erste Skript beschäftigt sich mit dem [TwoTrust Selekt-Produkt](https://www.hdi.de/multiselekt/) von HDI.
 
 Die Grundidee ist nicht schlecht und läuft auf folgendes heraus:
@@ -28,4 +30,14 @@ Folgende Kosten fallen hier an:
 * Von der Monatsrate fließen 5% an Verwaltungsgebühren ab.
 * Zusätzlich bekommt der Versicherungsvertreter 6% Provision. (Diese werden in den ersten 5 Jahren bezahlt und schmälern da dementsprechend stark den gesparten Wert)
 * Der Staat schneidet bei 3,86% Versicherungssteuer mit. 
-* Zusätzlich wird jedes Monat noch ein Minimalzins ca. 0,041% des ersparten Guthabens abgenommen. 
+* Zusätzlich wird jedes Monat noch ein Minimalzins ca. 0,041% des ersparten Guthabens abgenommen.
+
+### Der Check
+
+Der Check ist sehr simpel aufgebaut. Es wird zu Anfangs eine randomisierte Zinsentwicklung berechnet. In Fachzeitschriften werden mittlerweile 7 magere Jahre an der Börse angekündigt, also habe ich das wörtlich genommen und gehe in den nächsten 7 Jahren von massiven Kursverlusten aus.
+
+Die Ursprungskalkulation kann jederzeit angepasst werden. Einfach in den Input-Boxen die Werte ändern. Die Berechnung passiert dann automatisch.
+
+Zusätzlich stelle ich noch zwei erzkonservative Sparformen zum Vergleich vor:
+* Sparstrumpf - also einfach unverzinst "sparen".
+* Sparbuch - dazu habe ich den [Sparbuchtest der AK](https://www.bankenrechner.at/) hergenommen und von einem guten, vergleichbaren Angebot die Zinsen genommen. *Achtung*: Das ist nur ein Schätzwert. Die Produkte können nicht 1:1 verglichen werden.
